@@ -117,13 +117,13 @@ sudo chmod +x shutdown_now.sh
 # Get and Install KaniMoana Scheduling Files from GitHub
 # ------------------------------------------------------------
 
-cd /home/pi/wittyPi/schedules
+cd /home/pi/wittypi/schedules
 sudo rm *.wpi
 
 sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/wittyPi/KaniMoana_4m.sh
 
-cd /home/pi/wittyPi/schedules && sudo cp KaniMoana_4m.wpi /home/pi/wittyPi/schedule.wpi
-cd /home/pi/wittyPi && sudo ./runScript.sh
+cd /home/pi/wittypi/schedules && sudo cp KaniMoana_4m.wpi /home/pi/wittyPi/schedule.wpi
+cd /home/pi/wittypi && sudo ./runScript.sh
 
 # ------------------------------------------------------------
 # Edit .bashrc
