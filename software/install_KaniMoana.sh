@@ -46,6 +46,11 @@ sudo sh install.sh
 
 echo "Y" | rm install.sh
 
+# Clearing VOltage Thresholds 
+cd /home/pi/wittypi/
+printf '7\n0\n11\n' | sudo ./wittyPi.sh 
+printf '8\n0\n11\n' | sudo ./wittyPi.sh
+
 # ------------------------------------------------------------
 # Install WiringPi
 # ------------------------------------------------------------
