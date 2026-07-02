@@ -146,7 +146,9 @@ sudo echo "sleep 10" >> .bashrc
 sudo echo "" >> .bashrc
 sudo echo "cd /home/pi/kanimoana" >> .bashrc
 sudo echo "sudo ./KaniMoana.sh" >> .bashrc
+sudo echo "" >> .bashrc
 sudo echo "# wittyPi Scheduling and Shutdown Sequence for KaniMoana" >> .bashrc
+sudo echo "" >> .bashrc
 sudo echo "sudo ./shutdown_now.sh"  >> .bashrc
 
 # ------------------------------------------------------------
