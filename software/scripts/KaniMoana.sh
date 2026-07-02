@@ -3,8 +3,8 @@
 #  KaniMoana.sh
 #
 #
-#  Author: Camille Pagniello (cpagniel@stanford.edu)
-#  Last Edit: 05/07/2022
+#  Author: Leilani Phan (phanleil@hawaii.edu)
+#  Last Edit: 07/02/2026
 #  Script to schedule wittyPi and record audio
 #
 # ------------------------------------------------------------
