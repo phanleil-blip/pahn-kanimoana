@@ -18,7 +18,7 @@ echo "Start audio_recording.sh"
 # Write to .log file
 # ------------------------------------------------------------
 
-RUNFILE="KaniMoana3.log"
+RUNFILE="KaniMoana1.log"
 
 cd /media/DATA && sudo echo "Start Time of audio_recording.sh" $(date) >> "${RUNFILE}"
 
@@ -36,7 +36,7 @@ cd /media/DATA && sudo echo "Start Time of audio capture:" $(date) >> "${RUNFILE
 
 cd /media/DATA
 
-arecord -D sysdefault:CARD=sndrpihifiberry -r 48000 -d 1560 -f S16_LE -t wav -V mono KaniMoana3.$(date +%y%m%d%H%M%S).wav
+arecord -D sysdefault:CARD=sndrpihifiberry -r 48000 -d 1560 -f S16_LE -t wav -V mono KaniMoana1.$(date +%y%m%d%H%M%S).wav
 
 # ------------------------------------------------------------
 # Ending audio capture...
