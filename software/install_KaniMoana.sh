@@ -3,7 +3,7 @@
 #  install_KaniMoana.sh
 #
 #
-#  Author: Leilani Phan
+#  Author: Leilani Phan (phanleil@hawaii.edu)
 #  Last Edit: 07/02/2026
 #  Script to download, install and configure KaniMoana
 #
