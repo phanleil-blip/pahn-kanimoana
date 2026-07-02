@@ -92,7 +92,7 @@ echo ""
 
 cd /home/pi/kanimoana/config
 
-sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/config/asound.conf
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/main/software/config/asound.conf
 sudo cp asound.conf /etc
 
 # ------------------------------------------------------------
@@ -104,26 +104,31 @@ echo ""
 
 cd /home/pi/kanimoana
 
-sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/scripts/KaniMoana.sh
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/main/software/scripts/KaniMoana.sh
 sudo chmod +x KaniMoana.sh
 
-sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/scripts/audio_recording.sh
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/main/software/scripts/audio_recording.sh
 sudo chmod +x audio_recording.sh
 
-sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/scripts/shutdown_now.sh
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/main/software/scripts/shutdown_now.sh
 sudo chmod +x shutdown_now.sh
 
 # ------------------------------------------------------------
 # Get and Install KaniMoana Scheduling Files from GitHub
 # ------------------------------------------------------------
 
+echo "Downloading WittyPi schedule file..."
+echo ""
+
 cd /home/pi/wittypi/schedules
-sudo rm *.wpi
+sudo rm -f *.wpi
 
-sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/wittyPi/KaniMoana_4m.sh
+sudo wget -O KaniMoana_4m.wpi https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/main/software/wittyPi/KaniMoana_4m.wpi
 
-cd /home/pi/wittypi/schedules && sudo cp KaniMoana_4m.wpi /home/pi/wittyPi/schedule.wpi
-cd /home/pi/wittypi && sudo ./runScript.sh
+sudo cp KaniMoana_4m.wpi /home/pi/wittypi/schedule.wpi
+
+cd /home/pi/wittypi
+sudo ./runScript.sh
 
 # ------------------------------------------------------------
 # Edit .bashrc
@@ -141,9 +146,6 @@ sudo echo "sleep 10" >> .bashrc
 sudo echo "" >> .bashrc
 sudo echo "cd /home/pi/kanimoana" >> .bashrc
 sudo echo "sudo ./KaniMoana.sh" >> .bashrc
-sudo echo "" >> .bashrc
-sudo echo "# wittyPi Scheduling and Shutdown Sequence for KaniMoana"
-sudo echo "sudo ./shutdown_now.sh" >> .bashrc
 
 # ------------------------------------------------------------
 # Shutdown to Add WittyPi & HifiBerry
