@@ -92,7 +92,7 @@ echo ""
 
 cd /home/pi/kanimoana/config
 
-sudo wget https://raw.githubusercontent.com/cpagniel/KaniMoana/master/software/config/asound.conf
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/config/asound.conf
 sudo cp asound.conf /etc
 
 # ------------------------------------------------------------
@@ -104,11 +104,14 @@ echo ""
 
 cd /home/pi/kanimoana
 
-sudo wget https://raw.githubusercontent.com/cpagniel/KaniMoana/master/software/scripts/KaniMoana.sh
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/scripts/KaniMoana.sh
 sudo chmod +x KaniMoana.sh
 
-sudo wget https://raw.githubusercontent.com/cpagniel/KaniMoana/master/software/scripts/audio_recording.sh
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/scripts/audio_recording.sh
 sudo chmod +x audio_recording.sh
+
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/scripts/shutdown_now.sh
+sudo chmod +x shutdown_now.sh
 
 # ------------------------------------------------------------
 # Get and Install KaniMoana Scheduling Files from GitHub
@@ -117,7 +120,7 @@ sudo chmod +x audio_recording.sh
 cd /home/pi/wittyPi/schedules
 sudo rm *.wpi
 
-sudo wget https://raw.githubusercontent.com/cpagniel/KaniMoana/master/software/wittyPi/KaniMoana_4m.sh
+sudo wget https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/master/software/wittyPi/KaniMoana_4m.sh
 
 cd /home/pi/wittyPi/schedules && sudo cp KaniMoana_4m.wpi /home/pi/wittyPi/schedule.wpi
 cd /home/pi/wittyPi && sudo ./runScript.sh
