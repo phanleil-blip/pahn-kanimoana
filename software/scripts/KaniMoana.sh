@@ -159,6 +159,10 @@ echo "Cleaning up..."
 # Write .log
 cd /media/DATA && sudo echo "End Time of KaniMoana.sh" $(date) >> "${RUNFILE}"
 
+# Copy wittyPi logs to USB
+sudo cp /home/pi/wittypi/wittyPi.log /media/DATA/
+sudo cp /home/pi/wittypi/schedule.log /media/DATA/
+
 # ------------------------------------------------------------
 # Exit
 # ------------------------------------------------------------
