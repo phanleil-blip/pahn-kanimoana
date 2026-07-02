@@ -3,8 +3,8 @@
 #  install_KaniMoana.sh
 #
 #
-#  Author: Camille Pagniello (cpagniel@stanford.edu)
-#  Last Edit: 05/07/2022
+#  Author: Leilani Phan
+#  Last Edit: 07/02/2026
 #  Script to download, install and configure KaniMoana
 #
 
