@@ -70,6 +70,8 @@ cd /media
 sudo mkdir DATA
 sudo chown -R pi:pi /media/DATA
 
+sudo systemctl daemon-reload
+
 # ------------------------------------------------------------
 # Configure KaniMoana Directories
 # ------------------------------------------------------------
