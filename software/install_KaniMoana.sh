@@ -13,10 +13,10 @@ echo "Beginning installation..."
 echo ""
 
 # ------------------------------------------------------------
-# Update and Upgrade Bullseye OS
+# Update and Upgrade Bookworm OS
 # ------------------------------------------------------------
 
-echo "Updating and upgrading Bullseye OS..."
+echo "Updating and upgrading Bookworm OS..."
 echo ""
 
 sudo apt-get update
@@ -123,7 +123,7 @@ echo ""
 cd /home/pi/wittypi/schedules
 sudo rm -f *.wpi
 
-sudo wget -O KaniMoana_4m.wpi https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/main/software/wittyPi/KaniMoana_4m.wpi
+sudo wget -O KaniMoana_4m.wpi https://raw.githubusercontent.com/phanleil-blip/pahn-kanimoana/main/software/wittypi/KaniMoana_4m.wpi
 
 sudo cp KaniMoana_4m.wpi /home/pi/wittypi/schedule.wpi
 
@@ -146,6 +146,8 @@ sudo echo "sleep 10" >> .bashrc
 sudo echo "" >> .bashrc
 sudo echo "cd /home/pi/kanimoana" >> .bashrc
 sudo echo "sudo ./KaniMoana.sh" >> .bashrc
+sudo echo "# wittyPi Scheduling and Shutdown Sequence for KaniMoana"
+sudo echo "sudo ./shutdown_now.sh"  >> .bashrc
 
 # ------------------------------------------------------------
 # Shutdown to Add WittyPi & HifiBerry
