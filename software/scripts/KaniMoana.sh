@@ -20,9 +20,9 @@ echo "Current Time:" $(date)
 # Set Low Voltage Threshold
 # ------------------------------------------------------------
 
-cd /home/pi/wittypi/
-printf '7\n0\n11\n' | sudo ./wittyPi.sh 
-printf '8\n0\n11\n' | sudo ./wittyPi.sh
+#cd /home/pi/wittypi/
+#printf '7\n0\n11\n' | sudo ./wittyPi.sh 
+#printf '8\n0\n11\n' | sudo ./wittyPi.sh
 
 # ------------------------------------------------------------
 # Mount USB
