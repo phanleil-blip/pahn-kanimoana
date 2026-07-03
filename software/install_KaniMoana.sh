@@ -130,7 +130,7 @@ sudo wget -O KaniMoana_4m.wpi https://raw.githubusercontent.com/phanleil-blip/pa
 sudo cp KaniMoana_4m.wpi /home/pi/wittypi/schedule.wpi
 
 cd /home/pi/wittypi
-sudo ./runScript.sh
+#sudo ./runScript.sh
 
 # ------------------------------------------------------------
 # Edit .bashrc
