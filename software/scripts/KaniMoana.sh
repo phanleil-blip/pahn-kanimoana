@@ -156,6 +156,26 @@ if [ $(cat usb_space.txt) -ge 494085041152 ]; then
 fi
 
 # ------------------------------------------------------------
+# Schedule Next Start-Up
+# ------------------------------------------------------------
+
+echo ""
+echo "Schedule Next Start-Up:"
+
+echo "===== BEFORE schedule copy $(date) ====="
+cd /media/DATA && echo "BEFORE schedule copy at $(date)" >> "${RUNFILE}"
+
+sudo cp /home/pi/kanimoana/config/schedule.wpi /home/pi/wittypi/schedule.wpi
+
+echo "===== BEFORE runScript.sh $(date) ====="
+cd /media/DATA && echo "BEFORE runScript.sh at $(date)" >> "${RUNFILE}"
+
+cd /home/pi/wittypi && sudo ./runScript.sh
+
+echo "RPi scheduled to turn back on the half-hour from KaniMoana.sh"
+cd /media/DATA && echo "RPi scheduled to turn back on half-hour from KaniMoana.sh at:" $(date) >> "${RUNFILE}"
+
+# ------------------------------------------------------------
 # Cleanup
 # ------------------------------------------------------------
 
