@@ -50,11 +50,12 @@ echo "Y" | rm install.sh
 # Configure WittyPi Auto Power-On
 # ------------------------------------------------------------
 
-echo "Configuring WittyPi default power state ON..."
+echo "Setting WittyPi default state when powered to ON..."
 
-cd /home/pi/wittypi
+sudo i2cset -y 1 0x69 10 0x01 b
 
-printf '9\n1\n1\n11\n' | sudo ./wittyPi.sh
+echo "Checking WittyPi default state:"
+sudo i2cget -y 1 0x69 10
 
 echo "WittyPi will automatically boot when battery is connected."
 
