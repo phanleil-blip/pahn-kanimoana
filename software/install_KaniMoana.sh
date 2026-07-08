@@ -47,6 +47,18 @@ sudo sh install.sh
 echo "Y" | rm install.sh
 
 # ------------------------------------------------------------
+# Configure WittyPi Auto Power-On
+# ------------------------------------------------------------
+
+echo "Setting WittyPi to automatically boot when battery is connected..."
+
+cd /home/pi/wittypi
+
+sudo i2cset -y 1 0x08 0x07 1
+
+echo "WittyPi configured to automatically boot when power is connected."
+
+# ------------------------------------------------------------
 # Install WiringPi
 # ------------------------------------------------------------
 
