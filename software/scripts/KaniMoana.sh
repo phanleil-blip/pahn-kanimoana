@@ -41,7 +41,7 @@ USBNAME=$(sudo blkid | grep $USBID | cut -b 27-31)
 echo ""
 echo "Create .log"
 
-RUNFILE="KaniMoana3.log"
+RUNFILE="KaniMoana1.log"
 
 cd /media/DATA && echo "Start Time of KaniMoana.sh" $(date) >> "${RUNFILE}"
 
