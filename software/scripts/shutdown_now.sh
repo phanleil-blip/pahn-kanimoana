@@ -20,7 +20,7 @@ sleep 5
 # Create .log file
 # ------------------------------------------------------------
 
-RUNFILE="KaniMoana3.log"
+RUNFILE="KaniMoana1.log"
 
 # ------------------------------------------------------------
 # Shutdown RPi
