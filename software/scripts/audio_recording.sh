@@ -29,120 +29,64 @@ cd /media/DATA && sudo echo "Start Time of audio_recording.sh" $(date) >> "${RUN
 cd /media/DATA && sudo echo "Start Time of audio capture:" $(date) >> "${RUNFILE}"
 
 # ------------------------------------------------------------
-# Audio Capture with Recording-Start Indicator
+# Audio capture
 # ------------------------------------------------------------
 
-cd /media/DATA || {
-    echo "ERROR: Could not access /media/DATA"
-    exit 1
-}
+# Record for 26-minute (1560 seconds) wav file at 48 kHz with 16-bit resolution.
 
-# GPIO23 is physical pin 16 on the Raspberry Pi/HiFiBerry header.
+cd /media/DATA
+
+# ------------------------------------------------------------
+# LED Recording Indicator
+# ------------------------------------------------------------
+
+# GPIO23 is physical pin 16.
+# Connect the other LED wire to a true ground pin,
+# such as physical pin 14.
+
 LED_GPIO=23
 
-# Create the filename before starting arecord.
-FILENAME="KaniMoana1.$(date +%y%m%d%H%M%S).wav"
+blink_recording_led() {
+    # Allow arecord below to begin recording first.
+    sleep 1
 
-# Make sure the indicator begins in the OFF state.
-if command -v pinctrl > /dev/null 2>&1; then
-    pinctrl set "${LED_GPIO}" op dl
-    LED_AVAILABLE=true
-else
-    LED_AVAILABLE=false
-    echo "WARNING: pinctrl was not found. LED indicator disabled." \
-        >> "${RUNFILE}"
-fi
-
-# Start arecord in the background.
-arecord \
-    -D sysdefault:CARD=sndrpihifiberry \
-    -r 48000 \
-    -d 1560 \
-    -f S16_LE \
-    -t wav \
-    -V mono \
-    "${FILENAME}" &
-
-# Save the arecord process ID.
-ARECORD_PID=$!
-
-# Give arecord time to initialize the HiFiBerry and WAV file.
-sleep 1
-
-# Confirm that:
-# 1. arecord is still running
-# 2. the WAV file exists and is not empty
-if kill -0 "${ARECORD_PID}" 2>/dev/null && [ -s "${FILENAME}" ]; then
-
-    echo "arecord started successfully at $(date)" \
-        >> "${RUNFILE}"
-
-    echo "Recording file created: ${FILENAME}" \
-        >> "${RUNFILE}"
-
-    # Blink the indicator for five seconds.
-    if [ "${LED_AVAILABLE}" = true ]; then
-
-        echo "Recording indicator started at $(date)" \
+    # Confirm that the Bookworm GPIO command is installed.
+    if ! command -v pinctrl >/dev/null 2>&1; then
+        echo "WARNING: pinctrl not found; LED was not activated at $(date)" \
             >> "${RUNFILE}"
-
-        FLASH=0
-
-        while [ "${FLASH}" -lt 10 ]; do
-
-            # LED on.
-            pinctrl set "${LED_GPIO}" op dh
-            sleep 0.25
-
-            # LED off.
-            pinctrl set "${LED_GPIO}" op dl
-            sleep 0.25
-
-            FLASH=$((FLASH + 1))
-        done
-
-        # Keep the indicator off during the rest of recording.
-        pinctrl set "${LED_GPIO}" op dl
-
-        echo "Recording indicator finished at $(date)" \
-            >> "${RUNFILE}"
+        return
     fi
 
-else
+    echo "Recording indicator started at $(date)" >> "${RUNFILE}"
 
-    echo "ERROR: arecord did not start correctly at $(date)" \
-        >> "${RUNFILE}"
-
-    if [ "${LED_AVAILABLE}" = true ]; then
-        pinctrl set "${LED_GPIO}" op dl
-    fi
-
-fi
-
-# Wait for the complete 26-minute recording to finish.
-wait "${ARECORD_PID}"
-ARECORD_STATUS=$?
-
-# Make sure the indicator is off after recording.
-if [ "${LED_AVAILABLE}" = true ]; then
+    # Configure GPIO23 as an output and begin with LED off.
     pinctrl set "${LED_GPIO}" op dl
-fi
 
-# Log the final result.
-if [ "${ARECORD_STATUS}" -eq 0 ]; then
+    # Blink 10 times:
+    # 0.25 seconds on + 0.25 seconds off = 0.5 seconds
+    # 10 flashes = 5 seconds total.
+    FLASH_COUNT=0
 
-    echo "arecord completed successfully at $(date)" \
-        >> "${RUNFILE}"
+    while [ "${FLASH_COUNT}" -lt 10 ]; do
+        pinctrl set "${LED_GPIO}" op dh
+        sleep 0.25
 
-    echo "Final audio file: ${FILENAME}" \
-        >> "${RUNFILE}"
+        pinctrl set "${LED_GPIO}" op dl
+        sleep 0.25
 
-else
+        FLASH_COUNT=$((FLASH_COUNT + 1))
+    done
 
-    echo "ERROR: arecord exited with status ${ARECORD_STATUS} at $(date)" \
-        >> "${RUNFILE}"
+    # Ensure the LED stays off after blinking.
+    pinctrl set "${LED_GPIO}" op dl
 
-fi
+    echo "Recording indicator finished at $(date)" >> "${RUNFILE}"
+}
+
+# Run only the LED function in the background.
+blink_recording_led &
+
+arecord -D sysdefault:CARD=sndrpihifiberry -r 48000 -d 1560 -f S16_LE -t wav -V mono KaniMoana1.$(date +%y%m%d%H%M%S).wav
 
 # ------------------------------------------------------------
 # Ending audio capture...
